@@ -142,7 +142,7 @@ Aplikasi dapat diakses di:
 ## Fitur yang Masih Dikembangkan
 
 - **Metode pemesanan via hubungi Whatsapp**
-- **Pengiriman e-ticket via email** — placeholder kode sudah tersedia di `AdminOrderController`, tinggal mengisi konfigurasi SMTP dan mengaktifkan baris `Mail::to()` di method `confirm()`
+- **Pengiriman e-ticket via email**: placeholder kode sudah tersedia di `AdminOrderController`, tinggal mengisi konfigurasi SMTP dan mengaktifkan baris `Mail::to()` di method `confirm()`
 
 ## Lisensi
 
