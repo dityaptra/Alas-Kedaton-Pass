@@ -1,58 +1,151 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AlasKedatonPass
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem penjualan e-ticket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali. Dibangun menggunakan Laravel 13 sebagai bagian dari kegiatan pengabdian masyarakat untuk membantu digitalisasi operasional wisata.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Pemesanan tiket online tanpa perlu membuat akun
+- Generate nomor order otomatis sebagai referensi transaksi
+- Konfirmasi pembayaran manual via WhatsApp
+- Pengecekan status pesanan oleh pengunjung
+- Panel administrasi untuk mengelola order, tiket, dan konten berita
+- Halaman berita dan informasi seputar wisata
+- SEO-friendly dengan meta tags dan sitemap otomatis
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Layer | Teknologi |
+|---|---|
+| Backend | Laravel 13 (PHP 8.4) |
+| Styling | TailwindCSS v4 |
+| Interaktivitas | Alpine.js |
+| Template | Blade |
+| Database | MySQL 8 |
+| SEO | artesaos/seotools + spatie/laravel-sitemap |
+| Build Tool | Vite |
 
-## Learning Laravel
+## Persyaratan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Pastikan lingkungan pengembangan sudah memiliki:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2 atau lebih baru
+- Composer 2.x
+- Node.js 18+ dan npm
+- MySQL 8.0 atau lebih baru
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Instalasi
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clone Repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/dityaptra/Alas-Kedaton-Pass.git
+cd alaskedatonpass
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install Dependensi
 
-## Contributing
+```bash
+composer install
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Konfigurasi Environment
 
-## Code of Conduct
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Buka file `.env` dan sesuaikan konfigurasi berikut:
 
-## Security Vulnerabilities
+```env
+APP_NAME="AlasKedatonPass"
+APP_URL=http://localhost:8000
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=alaskedatonpass
+DB_USERNAME=root
+DB_PASSWORD=
 
-## License
+WHATSAPP_NUMBER=6281234567890
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 4. Setup Database
+
+Buat database baru di MySQL dengan nama yang sama seperti nilai `DB_DATABASE` di `.env`, kemudian jalankan migration dan seeder:
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+Seeder akan membuat dua akun default dan lima jenis tiket awal:
+
+| Email | Password | Role |
+|---|---|---|
+| admin@alaskedaton.com | password | Admin |
+| editor@alaskedaton.com | password | Editor |
+
+> **Penting:** Segera ganti password kedua akun ini setelah pertama kali login.
+
+### 5. Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 6. Build Assets
+
+```bash
+# Development
+npm run dev
+
+# Production
+npm run build
+```
+
+### 7. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Aplikasi dapat diakses di:
+- **Halaman publik:** http://localhost:8000
+- **Panel admin:** http://localhost:8000/admin/login
+
+## Struktur Role
+
+| Role | Akses |
+|---|---|
+| **Admin** | Akses penuh: kelola order, konfirmasi pembayaran, CRUD tiket, CRUD artikel, CRUD pengguna |
+| **Editor** | Terbatas: hanya CRUD artikel dan melihat dashboard |
+
+## Alur Pemesanan Tiket
+
+1. Pengunjung memilih tiket dan mengisi form pemesanan
+2. Sistem menyimpan order dan membuat nomor order (format: `AK-YYYYMMDD-XXXX`)
+3. Pengunjung melakukan transfer dan mengirim bukti ke WhatsApp pengelola
+4. Admin mengkonfirmasi pembayaran melalui panel admin
+5. Pengunjung mengecek status pesanan di halaman `/cek-pesanan`
+
+## Jenis Tiket
+
+| Jenis | Harga |
+|---|---|
+| Asing Dewasa | Rp 30.000/pax |
+| Asing Anak | Rp 20.000/pax |
+| Domestik Dewasa | Rp 20.000/pax |
+| Domestik Anak | Rp 15.000/pax |
+| Lokal/Bali | Rp 10.000/pax |
+
+## Fitur yang Masih Dikembangkan
+
+- **Metode pemesanan via hubungi Whatsapp**
+- **Pengiriman e-ticket via email** — placeholder kode sudah tersedia di `AdminOrderController`, tinggal mengisi konfigurasi SMTP dan mengaktifkan baris `Mail::to()` di method `confirm()`
+
+## Lisensi
+
+Proyek ini dikembangkan untuk keperluan pengabdian masyarakat.
