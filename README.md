@@ -68,8 +68,6 @@ DB_PORT=3306
 DB_DATABASE=alaskedatonpass
 DB_USERNAME=root
 DB_PASSWORD=
-
-WHATSAPP_NUMBER=6281234567890
 ```
 
 ### 4. Setup Database
