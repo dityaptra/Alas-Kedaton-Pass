@@ -12,7 +12,7 @@
 <body class="bg-stone-50 text-stone-800 font-sans antialiased">
 
     {{-- Navbar --}}
-    <header class="bg-white shadow-sm sticky top-0 z-50" x-data="{ open: false }">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
 
@@ -53,12 +53,13 @@
                 </nav>
 
                 {{-- Hamburger Mobile --}}
-                <button @click="open = !open" class="md:hidden p-2 rounded-lg text-stone-600 hover:bg-stone-100">
-                    <svg x-show="!open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="nav-toggle" class="md:hidden p-2 rounded-lg text-stone-600 hover:bg-stone-100">
+                    <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <svg x-show="open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -66,7 +67,7 @@
             </div>
 
             {{-- Nav Mobile --}}
-            <div x-show="open" x-transition class="md:hidden pb-4 space-y-1">
+            <div id="nav-mobile" class="hidden md:hidden pb-4 space-y-1">
                 <a href="{{ route('home') }}"
                     class="block px-3 py-2 rounded-lg text-stone-600 hover:bg-stone-100 text-sm">
                     Beranda
@@ -84,7 +85,8 @@
                     Cek Pesanan
                 </a>
                 <a href="{{ route('orders.create') }}"
-                    class="block px-3 py-2 rounded-lg bg-green-700 text-white text-sm font-medium text-center mt-2">
+                    class="block px-3 py-2 rounded-lg bg-green-700 text-white
+                          text-sm font-medium text-center mt-2">
                     Beli Tiket
                 </a>
             </div>
@@ -128,6 +130,19 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const toggle = document.getElementById('nav-toggle');
+        const navMobile = document.getElementById('nav-mobile');
+        const iconOpen = document.getElementById('icon-open');
+        const iconClose = document.getElementById('icon-close');
+
+        toggle.addEventListener('click', () => {
+            navMobile.classList.toggle('hidden');
+            iconOpen.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 
