@@ -4,6 +4,10 @@
 
 @section('content')
 
+@push('head')
+<meta name="robots" content="noindex, nofollow">
+@endpush
+
 <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
     <div class="text-center mb-8">
