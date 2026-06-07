@@ -30,7 +30,14 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        // tidak berubah, sama seperti sebelumnya
+        // Filter hanya tiket yang quantity-nya diisi
+        $filteredTickets = collect($request->tickets)
+            ->filter(fn($item) => isset($item['quantity']) && (int)$item['quantity'] > 0)
+            ->values()
+            ->toArray();
+
+        $request->merge(['tickets' => $filteredTickets]);
+
         $validated = $request->validate([
             'visitor_name'             => 'required|string|max:255',
             'visitor_phone'            => 'required|string|max:20',
@@ -47,6 +54,7 @@ class OrderController extends Controller
             'visit_date.required'       => 'Tanggal kunjungan wajib diisi.',
             'visit_date.after_or_equal' => 'Tanggal kunjungan tidak boleh kurang dari hari ini.',
             'tickets.required'          => 'Pilih minimal satu jenis tiket.',
+            'tickets.min'               => 'Pilih minimal satu jenis tiket.',
             'tickets.*.quantity.min'    => 'Jumlah tiket minimal 1.',
             'tickets.*.quantity.max'    => 'Jumlah tiket maksimal 50 per jenis.',
         ]);
@@ -80,7 +88,7 @@ class OrderController extends Controller
     public function success(string $orderNumber)
     {
         SEOMeta::setTitle('Pesanan Berhasil');
-        SEOMeta::robots('noindex, nofollow'); // halaman ini tidak perlu diindeks Google
+        // SEOMeta::robots('noindex, nofollow'); // halaman ini tidak perlu diindeks Google
 
         $order    = Order::with('items.ticketType')
             ->where('order_number', $orderNumber)
