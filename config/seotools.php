@@ -13,7 +13,7 @@ return [
             'title'        => "AlasKedatonPass", // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description'  => 'Beli tiket masuk Wisata Alas Kedaton secara online. Mudah, cepat, dan praktis.', // set false to total remove
-            'separator'    => ' — ',
+            'separator'    => ' - ',
             'keywords'     => ['alas kedaton', 'tiket wisata bali', 'tabanan bali', 'wisata bali'],
             'canonical'    => 'current', // Set to null or 'full' to use Url::full(), set to 'current' to use Url::current(), set false to total remove
             'robots'       => false, // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
