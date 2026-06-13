@@ -26,15 +26,18 @@ Route::get('/tiket', [TicketController::class, 'index'])->name('tickets.index');
 Route::get('/pesan', [OrderController::class, 'create'])->name('orders.create');
 Route::post('/pesan', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/pesan/sukses/{orderNumber}', [OrderController::class, 'success'])
-     ->name('orders.success');
+    ->name('orders.success');
 
 Route::get('/cek-pesanan', [OrderController::class, 'checkForm'])
-     ->name('orders.check');
+    ->name('orders.check');
 Route::post('/cek-pesanan', [OrderController::class, 'checkStatus'])
-     ->name('orders.check.status');
+    ->name('orders.check.status');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+
+Route::post('/berita/{slug}/komentar', [ArticleController::class, 'storeComment'])
+    ->name('articles.comment.store');
 
 Route::get('/sitemap.xml', function () {
     $sitemap = Sitemap::create()
@@ -82,27 +85,32 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Order & Tiket — hanya admin
         Route::middleware('role:admin')->group(function () {
             Route::get('/orders', [AdminOrderController::class, 'index'])
-                 ->name('orders.index');
+                ->name('orders.index');
             Route::get('/orders/{order}', [AdminOrderController::class, 'show'])
-                 ->name('orders.show');
+                ->name('orders.show');
             Route::post('/orders/{order}/confirm', [AdminOrderController::class, 'confirm'])
-                 ->name('orders.confirm');
+                ->name('orders.confirm');
             Route::post('/orders/{order}/cancel', [AdminOrderController::class, 'cancel'])
-                 ->name('orders.cancel');
+                ->name('orders.cancel');
             Route::post('/orders/{order}/proof', [AdminOrderController::class, 'uploadProof'])
-                 ->name('orders.proof');
+                ->name('orders.proof');
 
             Route::resource('ticket-types', TicketTypeController::class)
-                 ->names('ticket-types');
+                ->names('ticket-types');
 
             Route::resource('users', UserController::class)
-                 ->except(['show'])
-                 ->names('users');
+                ->except(['show'])
+                ->names('users');
         });
 
         // Artikel — admin dan editor
         Route::resource('articles', AdminArticleController::class)
-             ->except(['show'])
-             ->names('articles');
+            ->except(['show'])
+            ->names('articles');
+
+        Route::get('/comments', [\App\Http\Controllers\Admin\CommentController::class, 'index'])
+            ->name('comments.index');
+        Route::delete('/comments/{comment}', [\App\Http\Controllers\Admin\CommentController::class, 'destroy'])
+            ->name('comments.destroy');
     });
 });
