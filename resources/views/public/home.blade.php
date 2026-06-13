@@ -20,8 +20,8 @@
                     Alas Kedaton
                 </h1>
                 <p class="text-stone-300 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
-                    Hutan suci seluas 6 hektar, rumah bagi ribuan kera ekor panjang
-                    dan pura bersejarah yang masih aktif hingga hari ini.
+                    Selamat datang di Alas Kedaton, rumah bagi ribuan kera ekor panjang
+                    dan pura bersejarah yang menarik.
                 </p>
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('orders.create') }}"
@@ -42,7 +42,7 @@
                 class="absolute bottom-0 right-0 z-10 pb-16 pr-4 sm:pr-10 lg:pr-20
                     hidden lg:flex flex-col gap-2 text-right">
                 <p class="text-white/50 text-xs uppercase tracking-widest">Buka setiap hari</p>
-                <p class="text-white font-semibold text-sm">08.00 – 18.00 WITA</p>
+                <p class="text-white font-semibold text-sm">08.00 - 18.00 WITA</p>
             </div>
         </div>
     </section>

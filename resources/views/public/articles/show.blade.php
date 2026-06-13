@@ -14,7 +14,7 @@
 
         @if ($article->thumbnail)
             <img src="{{ Storage::url($article->thumbnail) }}" alt="{{ $article->title }}"
-                class="w-full h-72 object-cover rounded-2xl mb-8">
+                class="w-full h-96 object-cover rounded-2xl mb-8">
         @endif
 
         <div class="flex items-center gap-8 mb-6">
@@ -125,79 +125,83 @@
                 </div>
             @else
                 <div class="text-center py-10 text-stone-400 mb-12">
-                    <p class="text-4xl mb-3">💬</p>
                     <p class="text-sm">Belum ada komentar. Jadilah yang pertama!</p>
                 </div>
             @endif
 
-            {{-- Form Komentar --}}
-            <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-                <h3 class="font-bold text-stone-800 mb-5">Tulis Komentar</h3>
+            {{-- Form komentar --}}
+    <div class="border border-stone-200 p-6 bg-stone-50">
+        <h3 class="font-bold text-stone-800 mb-5">Tulis Komentar</h3>
 
-                @if (session('comment_success'))
-                    <div
-                        class="bg-green-50 border border-green-200 text-green-700 text-sm
-                        rounded-xl px-4 py-3 mb-5">
-                        {{ session('comment_success') }}
-                    </div>
-                @endif
+        @if (session('comment_success'))
+        <div class="bg-green-50 border border-green-200 text-green-700
+                    text-sm px-4 py-3 mb-5">
+            {{ session('comment_success') }}
+        </div>
+        @endif
 
-                <form action="{{ route('articles.comment.store', $article->slug) }}" method="POST" class="space-y-4">
-                    @csrf
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-stone-700 mb-1.5">
-                                Nama <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Nama kamu"
-                                class="w-full border border-stone-200 rounded-xl px-4 py-2.5
-                                      text-sm bg-white focus:outline-none focus:ring-2
-                                      focus:ring-green-500 focus:border-transparent transition
-                                      @error('name') border-red-400 @enderror">
-                            @error('name')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-stone-700 mb-1.5">
-                                Email <span class="text-red-500">*</span>
-                            </label>
-                            <input type="email" name="email" value="{{ old('email') }}" placeholder="email@contoh.com"
-                                class="w-full border border-stone-200 rounded-xl px-4 py-2.5
-                                      text-sm bg-white focus:outline-none focus:ring-2
-                                      focus:ring-green-500 focus:border-transparent transition
-                                      @error('email') border-red-400 @enderror">
-                            <p class="text-xs text-stone-400 mt-1">
-                                Email tidak akan ditampilkan ke publik.
-                            </p>
-                            @error('email')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-stone-700 mb-1.5">
-                            Komentar <span class="text-red-500">*</span>
-                        </label>
-                        <textarea name="content" rows="4" placeholder="Tulis komentar kamu di sini..."
-                            class="w-full border border-stone-200 rounded-xl px-4 py-2.5
-                                     text-sm bg-white focus:outline-none focus:ring-2
-                                     focus:ring-green-500 focus:border-transparent transition
-                                     resize-none @error('content') border-red-400 @enderror">{{ old('content') }}</textarea>
-                        @error('content')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <button type="submit"
-                        class="bg-green-700 hover:bg-green-800 text-white font-semibold
-                               px-6 py-2.5 rounded-xl text-sm transition">
-                        Kirim Komentar
-                    </button>
-                </form>
+        <form action="{{ route('articles.comment.store', $article->slug) }}"
+              method="POST" class="space-y-4">
+            @csrf
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600
+                                  uppercase tracking-widest mb-2">
+                        Nama <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="name"
+                           value="{{ old('name') }}"
+                           placeholder="Nama kamu"
+                           class="w-full border border-stone-200 px-4 py-2.5 text-sm
+                                  bg-white focus:outline-none focus:ring-2
+                                  focus:ring-green-500 transition
+                                  @error('name') border-red-400 @enderror">
+                    @error('name')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600
+                                  uppercase tracking-widest mb-2">
+                        Email <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" name="email"
+                           value="{{ old('email') }}"
+                           placeholder="email@contoh.com"
+                           class="w-full border border-stone-200 px-4 py-2.5 text-sm
+                                  bg-white focus:outline-none focus:ring-2
+                                  focus:ring-green-500 transition
+                                  @error('email') border-red-400 @enderror">
+                    <p class="text-xs text-stone-400 mt-1">
+                        Email tidak akan ditampilkan ke publik.
+                    </p>
+                    @error('email')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
+            <div>
+                <label class="block text-xs font-semibold text-stone-600
+                              uppercase tracking-widest mb-2">
+                    Komentar <span class="text-red-500">*</span>
+                </label>
+                <textarea name="content" rows="4"
+                          placeholder="Tulis komentar kamu di sini..."
+                          class="w-full border border-stone-200 px-4 py-2.5 text-sm
+                                 bg-white focus:outline-none focus:ring-2
+                                 focus:ring-green-500 transition resize-none
+                                 @error('content') border-red-400 @enderror">{{ old('content') }}</textarea>
+                @error('content')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <button type="submit"
+                    class="bg-green-700 hover:bg-green-800 text-white
+                           font-semibold px-6 py-2.5 text-sm transition">
+                Kirim Komentar
+            </button>
+        </form>
+    </div>
 
         </div>
     </section>
