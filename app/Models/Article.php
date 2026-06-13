@@ -34,8 +34,7 @@ class Article extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
-            ->whereNotNull('published_at')
-            ->orderByDesc('published_at');
+            ->whereNotNull('published_at');
     }
 
     public function comments(): HasMany

@@ -28,8 +28,12 @@ class ArticleController extends Controller
 
         $articles = Article::published()
             ->when($search, fn($q) => $q->where('title', 'like', "%{$search}%"))
-            ->when($sort === 'oldest', fn($q) => $q->oldest('published_at'))
-            ->paginate(9)
+            ->when(
+                $sort === 'oldest',
+                fn($q) => $q->oldest('published_at')->oldest('id'),
+                fn($q) => $q->latest('published_at')->latest('id')
+            )
+            ->paginate(3)
             ->withQueryString();
 
         return view('public.articles.index', compact('articles', 'sort', 'search'));
@@ -42,6 +46,16 @@ class ArticleController extends Controller
             ->firstOrFail();
 
         $article->load('comments');
+
+        $previous = Article::published()
+            ->where('published_at', '<', $article->published_at)
+            ->latest('published_at')
+            ->first();
+
+        $next = Article::published()
+            ->where('published_at', '>', $article->published_at)
+            ->oldest('published_at')
+            ->first();
 
         // Ambil 3 artikel lain secara acak, exclude artikel yang sedang dibaca
         $related = Article::published()
@@ -65,7 +79,7 @@ class ArticleController extends Controller
             OpenGraph::addImage(Storage::url($article->thumbnail));
         }
 
-        return view('public.articles.show', compact('article', 'related'));
+        return view('public.articles.show', compact('article', 'related', 'previous', 'next'));
     }
 
     public function storeComment(Request $request, string $slug)
