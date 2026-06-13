@@ -6,201 +6,301 @@
 
     {{-- Hero --}}
     <section class="relative text-white overflow-hidden">
-
-        <div class="relative h-[600px] sm:h-[680px]">
+        <div class="relative h-[90vh] min-h-[560px] max-h-[800px]">
             <img src="/images/alas-kedaton-hero.jpg" alt="Wisata Alas Kedaton"
-                class="absolute inset-0 w-full h-full object-cover brightness-50">
+                class="absolute inset-0 w-full h-full object-cover">
+            {{-- Gradient overlay dari bawah agar teks atas tetap terlihat --}}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
 
+            {{-- Konten di tengah bawah --}}
             <div
-                class="relative z-10 h-full flex flex-col items-center justify-center
-                    text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
-                    Selamat Datang di<br>
-                    <span class="text-amber-400">Alas Kedaton</span>
+                class="absolute bottom-0 left-0 right-0 z-10 pb-16 px-4 sm:px-10 lg:px-20
+                    max-w-6xl mx-auto">
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-none mb-5">
+                    Alas Kedaton
                 </h1>
-                <p class="text-lg text-stone-100 max-w-2xl mb-10 drop-shadow">
-                    Hutan suci dengan ribuan kera dan pura bersejarah di jantung Tabanan, Bali.
-                    Pesan tiket masuk kamu sekarang secara online.
+                <p class="text-stone-300 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
+                    Hutan suci seluas 6 hektar, rumah bagi ribuan kera ekor panjang
+                    dan pura bersejarah yang masih aktif hingga hari ini.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="flex flex-wrap gap-3">
                     <a href="{{ route('orders.create') }}"
-                        class="bg-amber-500 hover:bg-amber-600 text-white font-semibold
-                          px-8 py-3 rounded-xl transition text-lg shadow-lg">
-                        Beli Tiket Sekarang
+                        class="bg-amber-500 hover:bg-amber-400 text-white font-semibold
+                          px-7 py-3 transition text-sm uppercase tracking-wider">
+                        Beli Tiket
                     </a>
                     <a href="{{ route('tickets.index') }}"
-                        class="bg-white/20 hover:bg-white/30 text-white font-semibold
-                          px-8 py-3 rounded-xl transition text-lg backdrop-blur-sm
-                          border border-white/30 shadow-lg">
-                        Lihat Harga Tiket
+                        class="border border-white/40 hover:border-white text-white
+                          font-medium px-7 py-3 transition text-sm uppercase tracking-wider">
+                        Lihat Harga
                     </a>
                 </div>
             </div>
-        </div>
 
+            {{-- Info strip di pojok kanan bawah --}}
+            <div
+                class="absolute bottom-0 right-0 z-10 pb-16 pr-4 sm:pr-10 lg:pr-20
+                    hidden lg:flex flex-col gap-2 text-right">
+                <p class="text-white/50 text-xs uppercase tracking-widest">Buka setiap hari</p>
+                <p class="text-white font-semibold text-sm">08.00 – 18.00 WITA</p>
+            </div>
+        </div>
     </section>
 
-    {{-- Info Singkat --}}
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="bg-white rounded-2xl shadow-md p-6 flex items-start gap-4">
-                <div class="bg-green-100 p-3 rounded-xl">
-                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+    {{-- Strip fakta singkat --}}
+    <section class="bg-stone-900 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-3 divide-x divide-stone-700">
+                <div class="py-6 px-6 sm:px-10">
+                    <p class="text-amber-400 text-2xl sm:text-3xl font-bold mb-1">100rb+</p>
+                    <p class="text-stone-400 text-xs sm:text-sm">Pengunjung per tahun</p>
                 </div>
-                <div>
-                    <p class="font-semibold text-stone-800">Jam Buka</p>
-                    <p class="text-sm text-stone-500">08.00 – 18.00 WITA</p>
-                    <p class="text-sm text-stone-500">Setiap hari</p>
+                <div class="py-6 px-6 sm:px-10">
+                    <p class="text-amber-400 text-2xl sm:text-3xl font-bold mb-1">5 Jenis</p>
+                    <p class="text-stone-400 text-xs sm:text-sm">Kategori tiket tersedia</p>
                 </div>
-            </div>
-            <div class="bg-white rounded-2xl shadow-md p-6 flex items-start gap-4">
-                <div class="bg-amber-100 p-3 rounded-xl">
-                    <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="font-semibold text-stone-800">Lokasi</p>
-                    <p class="text-sm text-stone-500">Jl. Raya Kukuh</p>
-                    <p class="text-sm text-stone-500">Tabanan, Bali</p>
-                </div>
-            </div>
-            <div class="bg-white rounded-2xl shadow-md p-6 flex items-start gap-4">
-                <div class="bg-blue-100 p-3 rounded-xl">
-                    <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="font-semibold text-stone-800">Tiket Mulai</p>
-                    <p class="text-sm text-stone-500">Rp 10.000/pax</p>
-                    <p class="text-sm text-stone-500">Sudah termasuk pajak</p>
+                <div class="py-6 px-6 sm:px-10">
+                    <p class="text-amber-400 text-2xl sm:text-3xl font-bold mb-1">Rp 10rb</p>
+                    <p class="text-stone-400 text-xs sm:text-sm">Tiket mulai dari</p>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Harga Tiket --}}
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-stone-800">Harga Tiket Masuk</h2>
-            <p class="text-stone-500 mt-2">Pilih tiket sesuai kategori kunjunganmu</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach ($tickets as $ticket)
-                <div
-                    class="bg-white rounded-2xl shadow-sm border border-stone-100
-                    hover:shadow-md transition p-6 flex flex-col">
-                    <div class="flex items-center justify-between mb-4">
-                        <span
-                            class="text-xs font-bold uppercase tracking-widest
-                             text-green-700 bg-green-50 px-2 py-1 rounded-full">
-                            {{ $ticket->category }}
-                        </span>
-                        @if ($ticket->visitor_type)
-                            <span class="text-xs text-stone-400">{{ ucfirst($ticket->visitor_type) }}</span>
-                        @endif
-                    </div>
-                    <h3 class="text-lg font-bold text-stone-800 mb-1">{{ $ticket->name }}</h3>
-                    <p class="text-stone-400 text-sm mb-4 flex-1">
-                        {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
+    {{-- Tiket --}}
+    <section class="py-20 bg-stone-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+                <div>
+                    <p class="text-green-700 text-xs font-semibold uppercase tracking-[0.15em] mb-2">
+                        Tiket Masuk
                     </p>
-                    <div class="border-t border-stone-100 pt-4 flex items-end justify-between">
-                        <div>
-                            <p class="text-2xl font-bold text-amber-600">
-                                Rp {{ number_format($ticket->price, 0, ',', '.') }}
-                            </p>
-                            <p class="text-xs text-stone-400">per orang · sudah termasuk pajak</p>
-                        </div>
-                        <a href="{{ route('orders.create') }}"
-                            class="bg-green-700 hover:bg-green-800 text-white text-sm
-                          font-medium px-4 py-2 rounded-lg transition">
-                            Pesan
-                        </a>
-                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-stone-900 leading-tight">
+                        Harga yang transparan,<br>tanpa biaya tersembunyi
+                    </h2>
                 </div>
-            @endforeach
+            </div>
+
+            {{-- Baris pertama: 3 tiket --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                @foreach ($tickets->take(3) as $ticket)
+                    <div
+                        class="bg-white p-7 flex flex-col gap-4 border border-stone-300
+                        hover:border-green-600 hover:shadow-sm transition">
+                        <div>
+                            <p class="text-xs text-stone-400 uppercase tracking-widest mb-1">
+                                {{ $ticket->category === 'asing' ? 'Wisatawan Asing' : ($ticket->category === 'domestik' ? 'Wisatawan Domestik' : 'Warga Lokal') }}
+                            </p>
+                            <h3 class="text-lg font-bold text-stone-800">{{ $ticket->name }}</h3>
+                        </div>
+                        <p class="text-stone-400 text-sm leading-relaxed flex-1">
+                            {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                            <div>
+                                <p class="text-2xl font-bold text-stone-900">
+                                    Rp {{ number_format($ticket->price, 0, ',', '.') }}
+                                </p>
+                                <p class="text-xs text-stone-400 mt-0.5">per orang · sudah termasuk pajak</p>
+                            </div>
+                            <a href="{{ route('orders.create') }}"
+                                class="text-green-700 hover:text-green-800 text-sm font-semibold
+                              transition flex items-center gap-1">
+                                Pesan
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Baris kedua: 2 tiket --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @foreach ($tickets->skip(3) as $ticket)
+                    <div
+                        class="bg-white p-7 flex flex-col gap-4 border border-stone-300
+                        hover:border-green-600 hover:shadow-sm transition">
+                        <div>
+                            <p class="text-xs text-stone-400 uppercase tracking-widest mb-1">
+                                {{ $ticket->category === 'asing' ? 'Wisatawan Asing' : ($ticket->category === 'domestik' ? 'Wisatawan Domestik' : 'Warga Lokal') }}
+                            </p>
+                            <h3 class="text-lg font-bold text-stone-800">{{ $ticket->name }}</h3>
+                        </div>
+                        <p class="text-stone-400 text-sm leading-relaxed flex-1">
+                            {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                            <div>
+                                <p class="text-2xl font-bold text-stone-900">
+                                    Rp {{ number_format($ticket->price, 0, ',', '.') }}
+                                </p>
+                                <p class="text-xs text-stone-400 mt-0.5">per orang · sudah termasuk pajak</p>
+                            </div>
+                            <a href="{{ route('orders.create') }}"
+                                class="text-green-700 hover:text-green-800 text-sm font-semibold
+                              transition flex items-center gap-1">
+                                Pesan
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
         </div>
     </section>
 
-    {{-- Berita Terbaru --}}
+    {{-- Cara pesan --}}
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <div>
+                    <p class="text-green-700 text-xs font-semibold uppercase tracking-[0.15em] mb-3">
+                        Cara Pesan
+                    </p>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-stone-900 leading-tight mb-6">
+                        Pesan dari rumah,<br>langsung masuk saat tiba
+                    </h2>
+                    <p class="text-stone-500 leading-relaxed mb-10">
+                        Tidak perlu antre di loket. Isi form, selesaikan pembayaran,
+                        dan tunjukkan e-ticket saat masuk.
+                    </p>
+                    <a href="{{ route('orders.create') }}"
+                        class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800
+                          text-white font-medium px-7 py-3 transition text-sm">
+                        Mulai Pesan
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-0 border border-stone-100">
+                    <div class="flex gap-5 p-6 border-b border-stone-100">
+                        <span class="text-3xl font-bold text-stone-200 leading-none flex-shrink-0">01</span>
+                        <div>
+                            <p class="font-semibold text-stone-800 mb-1">Isi data & pilih tiket</p>
+                            <p class="text-stone-400 text-sm leading-relaxed">
+                                Masukkan nama, email, tanggal kunjungan, dan pilih jenis tiket yang sesuai.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 p-6 border-b border-stone-100">
+                        <span class="text-3xl font-bold text-stone-200 leading-none flex-shrink-0">02</span>
+                        <div>
+                            <p class="font-semibold text-stone-800 mb-1">Transfer & konfirmasi via WA</p>
+                            <p class="text-stone-400 text-sm leading-relaxed">
+                                Transfer sesuai total, lalu kirim bukti ke WhatsApp pengelola beserta nomor order.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 p-6">
+                        <span class="text-3xl font-bold text-stone-200 leading-none flex-shrink-0">03</span>
+                        <div>
+                            <p class="font-semibold text-stone-800 mb-1">Terima e-ticket</p>
+                            <p class="text-stone-400 text-sm leading-relaxed">
+                                E-ticket dikirim ke email setelah pembayaran dikonfirmasi. Tunjukkan saat masuk.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {{-- Berita --}}
     @if ($articles->count())
-        <section class="bg-stone-100 py-20">
+        <section class="py-20 bg-stone-50">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between mb-10">
+
+                <div class="flex items-end justify-between mb-12">
                     <div>
-                        <h2 class="text-3xl font-bold text-stone-800">Berita Terbaru</h2>
-                        <p class="text-stone-500 mt-1">Info dan kabar terkini dari Alas Kedaton</p>
+                        <p class="text-green-700 text-xs font-semibold uppercase tracking-[0.15em] mb-2">
+                            Berita & Info
+                        </p>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-stone-900">
+                            Kabar terkini dari<br>Alas Kedaton
+                        </h2>
                     </div>
                     <a href="{{ route('articles.index') }}"
-                        class="text-green-700 hover:text-green-800 font-medium text-sm transition hidden sm:block">
-                        Lihat semua →
+                        class="text-sm text-stone-500 hover:text-green-700 transition
+                      hidden sm:flex items-center gap-1 font-medium">
+                        Semua berita
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
                     </a>
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach ($articles as $article)
                         <a href="{{ route('articles.show', $article->slug) }}"
-                            class="bg-white rounded-2xl overflow-hidden shadow-sm
-                      hover:shadow-md transition group">
+                            class="bg-white border border-stone-300 overflow-hidden group">
                             @if ($article->thumbnail)
                                 <img src="{{ Storage::url($article->thumbnail) }}" alt="{{ $article->title }}"
-                                    class="w-full h-48 object-cover group-hover:scale-105
-                            transition duration-300">
+                                    class="w-full h-52 object-cover">
                             @else
-                                <div class="w-full h-48 bg-green-100 flex items-center justify-center">
-                                    <span class="text-green-300 text-4xl">🌿</span>
+                                <div
+                                    class="w-full h-52 bg-gradient-to-br from-green-900 to-green-700
+                    flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white/20" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                    </svg>
                                 </div>
                             @endif
-                            <div class="p-5">
-                                <p class="text-xs text-stone-400 mb-2">
-                                    {{ $article->published_at->translatedFormat('d F Y') }}
+                            <div class="p-6">
+                                <p class="text-xs text-stone-400 uppercase tracking-widest mb-3">
+                                    {{ $article->published_at->format('d M Y') }}
                                 </p>
                                 <h3
-                                    class="font-semibold text-stone-800 leading-snug
-                               group-hover:text-green-700 transition line-clamp-2">
+                                    class="font-bold text-stone-800 leading-snug mb-3 line-clamp-2
+                       group-hover:text-green-700 transition">
                                     {{ $article->title }}
                                 </h3>
+                                <p class="text-stone-400 text-sm leading-relaxed line-clamp-2">
+                                    {{ Str::limit(strip_tags($article->content), 90) }}
+                                </p>
                             </div>
                         </a>
                     @endforeach
                 </div>
+
+                <div class="text-center mt-8 sm:hidden">
+                    <a href="{{ route('articles.index') }}"
+                        class="text-green-700 text-sm font-medium hover:text-green-800 transition">
+                        Lihat semua berita →
+                    </a>
+                </div>
+
             </div>
         </section>
     @endif
 
-    {{-- CTA --}}
-    <section class="bg-green-800 text-white py-20">
-        <div class="max-w-3xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Siap Berkunjung?</h2>
-            <p class="text-green-200 mb-8">
-                Pesan tiket sekarang dan hindari antrean panjang di lokasi.
-            </p>
-            <a href="{{ route('orders.create') }}"
-                class="inline-block bg-amber-500 hover:bg-amber-600 text-white
-                  font-semibold px-10 py-4 rounded-xl transition text-lg">
-                Beli Tiket Sekarang
-            </a>
-        </div>
-    </section>
-
-    <section class="bg-stone-100 py-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="rounded-2xl overflow-hidden shadow-sm border border-stone-200">
+    {{-- Peta --}}
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-stone-900">Lokasi Alas Kedaton</h2>
+            </div>
+            <div class="overflow-hidden border border-stone-200">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3416.532535999096!2d115.149883988855!3d-8.527533800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23b164d2a8bb3%3A0x118812004a86244b!2sAlas%20Kedaton!5e1!3m2!1sid!2sid!4v1780797673656!5m2!1sid!2sid"
-                    width="100%" height="450" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+                    width="100%" height="580" style="border:0; display:block;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade" title="Lokasi Wisata Alas Kedaton">
                 </iframe>
             </div>
-
         </div>
     </section>
 
