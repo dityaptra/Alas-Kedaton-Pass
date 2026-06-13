@@ -1,15 +1,16 @@
 # AlasKedatonPass
 
-Sistem penjualan e-ticket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali. Dibangun menggunakan Laravel 13 sebagai bagian dari kegiatan pengabdian masyarakat untuk membantu digitalisasi operasional wisata.
+Sistem penjualan e-ticket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali. Dibangun menggunakan Laravel 13 untuk membantu digitalisasi operasional wisata.
 
 ## Fitur
 
 - Pemesanan tiket online tanpa perlu membuat akun
-- Generate nomor order otomatis sebagai referensi transaksi
+- Generate nomor order otomatis sebagai referensi transaksi (format: `AK-YYYYMMDD-XXXX`)
 - Konfirmasi pembayaran manual via WhatsApp
 - Pengecekan status pesanan oleh pengunjung
-- Panel administrasi untuk mengelola order, tiket, dan konten berita
-- Halaman berita dan informasi seputar wisata
+- Panel administrasi untuk mengelola order, tiket, konten berita, komentar, dan pengguna
+- Halaman berita dengan fitur pencarian dan filter terbaru/terlama
+- Komentar pada artikel berita
 - SEO-friendly dengan meta tags dan sitemap otomatis
 
 ## Tech Stack
@@ -18,7 +19,7 @@ Sistem penjualan e-ticket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali.
 |---|---|
 | Backend | Laravel 13 (PHP 8.4) |
 | Styling | TailwindCSS v4 |
-| Interaktivitas | Alpine.js |
+| Interaktivitas | Vanilla JavaScript |
 | Template | Blade |
 | Database | MySQL 8 |
 | SEO | artesaos/seotools + spatie/laravel-sitemap |
@@ -39,7 +40,7 @@ Pastikan lingkungan pengembangan sudah memiliki:
 
 ```bash
 git clone https://github.com/dityaptra/Alas-Kedaton-Pass.git
-cd alaskedatonpass
+cd Alas-Kedaton-Pass
 ```
 
 ### 2. Install Dependensi
@@ -118,32 +119,27 @@ Aplikasi dapat diakses di:
 
 | Role | Akses |
 |---|---|
-| **Admin** | Akses penuh: kelola order, konfirmasi pembayaran, CRUD tiket, CRUD artikel, CRUD pengguna |
+| **Admin** | Akses penuh: kelola order, konfirmasi pembayaran, CRUD tiket, CRUD artikel, kelola komentar, CRUD pengguna |
 | **Editor** | Terbatas: hanya CRUD artikel dan melihat dashboard |
 
 ## Alur Pemesanan Tiket
 
-1. Pengunjung memilih tiket dan mengisi form pemesanan
-2. Sistem menyimpan order dan membuat nomor order (format: `AK-YYYYMMDD-XXXX`)
-3. Pengunjung melakukan transfer dan mengirim bukti ke WhatsApp pengelola
-4. Admin mengkonfirmasi pembayaran melalui panel admin
-5. Pengunjung mengecek status pesanan di halaman `/cek-pesanan`
+1. Pengunjung memilih tiket dan mengisi form pemesanan (nama, WhatsApp, email, tanggal kunjungan)
+2. Sistem menyimpan order ke database dan membuat nomor order unik
+3. Pengunjung melakukan transfer sesuai total, lalu mengirim bukti ke WhatsApp pengelola beserta nomor order
+4. Admin membuka panel, mencari order, lalu mengklik Konfirmasi Pembayaran
+5. Pengunjung dapat mengecek status pesanan kapan saja di halaman `/cek-pesanan`
 
 ## Jenis Tiket
 
-| Jenis | Harga |
-|---|---|
-| Asing Dewasa | Rp 30.000/pax |
-| Asing Anak | Rp 20.000/pax |
-| Domestik Dewasa | Rp 20.000/pax |
-| Domestik Anak | Rp 15.000/pax |
-| Lokal/Bali | Rp 10.000/pax |
+| Jenis | Kategori | Harga |
+|---|---|---|
+| Asing Dewasa | Wisatawan Mancanegara | Rp 30.000/pax |
+| Asing Anak | Wisatawan Mancanegara | Rp 20.000/pax |
+| Domestik Dewasa | Wisatawan Nusantara | Rp 20.000/pax |
+| Domestik Anak | Wisatawan Nusantara | Rp 15.000/pax |
+| Lokal/Bali | Warga Bali | Rp 10.000/pax |
 
-## Fitur yang Masih Dikembangkan
+## Fitur yang Belum Diimplementasikan
 
-- **Metode pemesanan via hubungi Whatsapp**
-- **Pengiriman e-ticket via email**: placeholder kode sudah tersedia di `AdminOrderController`, tinggal mengisi konfigurasi SMTP dan mengaktifkan baris `Mail::to()` di method `confirm()`
-
-## Lisensi
-
-Proyek ini dikembangkan untuk keperluan pengabdian masyarakat.
+- **Pengiriman e-ticket via email** — placeholder kode sudah tersedia di `app/Http/Controllers/Admin/OrderController.php` pada method `confirm()`. Untuk mengaktifkan, isi konfigurasi `MAIL_*` di `.env`, buat Mailable baru dengan `php artisan make:mail ETicketMail`, dan uncomment baris `Mail::to()` di controller tersebut.
