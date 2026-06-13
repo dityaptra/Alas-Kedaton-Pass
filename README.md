@@ -142,4 +142,4 @@ Aplikasi dapat diakses di:
 
 ## Fitur yang Belum Diimplementasikan
 
-- **Pengiriman e-ticket via email** — placeholder kode sudah tersedia di `app/Http/Controllers/Admin/OrderController.php` pada method `confirm()`. Untuk mengaktifkan, isi konfigurasi `MAIL_*` di `.env`, buat Mailable baru dengan `php artisan make:mail ETicketMail`, dan uncomment baris `Mail::to()` di controller tersebut.
+- **Pengiriman e-ticket via email**: placeholder kode sudah tersedia di `app/Http/Controllers/Admin/OrderController.php` pada method `confirm()`. Untuk mengaktifkan, isi konfigurasi `MAIL_*` di `.env`, buat Mailable baru dengan `php artisan make:mail ETicketMail`, dan uncomment baris `Mail::to()` di controller tersebut.
