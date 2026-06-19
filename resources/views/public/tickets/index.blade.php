@@ -14,22 +14,21 @@
     <section class="py-16 bg-stone-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {{-- Baris pertama: 3 tiket --}}
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                @foreach ($tickets->take(3) as $ticket)
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+                @foreach ($tickets as $ticket)
                     <div
-                        class="bg-white p-7 flex flex-col gap-4 border border-stone-300
+                        class="bg-white p-7 flex flex-col gap-4 border border-stone-400
                         hover:border-green-600 hover:shadow-sm transition">
-                        <div class="bg-green-700 -mx-7 -mt-7 px-7 py-4 mb-2">
-                            <p class="text-green-300 text-xs uppercase tracking-widest mb-1">
+                        <div>
+                            <p class="text-xs text-stone-400 uppercase tracking-widest mb-1">
                                 {{ $ticket->category === 'asing' ? 'Wisatawan Asing' : ($ticket->category === 'domestik' ? 'Wisatawan Domestik' : 'Warga Lokal') }}
                             </p>
-                            <h3 class="text-lg font-bold text-white">{{ $ticket->name }}</h3>
+                            <h3 class="text-lg font-bold text-stone-800">{{ $ticket->name }}</h3>
                         </div>
                         <p class="text-stone-400 text-sm leading-relaxed flex-1">
                             {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
                         </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-400">
                             <div>
                                 <p class="text-2xl font-bold text-stone-900">
                                     Rp {{ number_format($ticket->price, 0, ',', '.') }}
@@ -48,42 +47,11 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
 
-            {{-- Baris kedua: 2 tiket --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
-                @foreach ($tickets->skip(3) as $ticket)
-                    <div
-                        class="bg-white p-7 flex flex-col gap-4 border border-stone-300
-                        hover:border-green-600 hover:shadow-sm transition">
-                        <div class="bg-green-700 -mx-7 -mt-7 px-7 py-4 mb-2">
-                            <p class="text-green-300 text-xs uppercase tracking-widest mb-1">
-                                {{ $ticket->category === 'asing' ? 'Wisatawan Asing' : ($ticket->category === 'domestik' ? 'Wisatawan Domestik' : 'Warga Lokal') }}
-                            </p>
-                            <h3 class="text-lg font-bold text-white">{{ $ticket->name }}</h3>
-                        </div>
-                        <p class="text-stone-400 text-sm leading-relaxed flex-1">
-                            {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-100">
-                            <div>
-                                <p class="text-2xl font-bold text-stone-900">
-                                    Rp {{ number_format($ticket->price, 0, ',', '.') }}
-                                </p>
-                                <p class="text-xs text-stone-400 mt-0.5">per orang · sudah termasuk pajak</p>
-                            </div>
-                            <a href="{{ route('orders.create') }}"
-                                class="text-green-700 hover:text-green-800 text-sm font-semibold
-                              transition flex items-center gap-1">
-                                Pesan
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+                {{-- Pengisi agar baris terakhir tetap 3 kolom --}}
+                @if ($tickets->count() % 3 === 2)
+                    <div class="hidden sm:block"></div>
+                @endif
             </div>
 
             {{-- Informasi penting --}}
