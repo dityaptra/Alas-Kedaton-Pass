@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AuthController extends Controller
 {
@@ -28,6 +29,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }
+
+        // Rate Limiter untuk mencatat percobaan login gagal
+        RateLimiter::hit('login.' . $request->ip());
 
         return back()->withErrors([
             'email' => 'Email atau password salah.',

@@ -75,7 +75,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Auth (guest admin saja yang bisa akses)
     Route::middleware('guest')->group(function () {
         Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-        Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+        Route::post('/login', [AuthController::class, 'login'])->name('login.post')
+            ->middleware('throttle:5,1');
     });
 
     Route::middleware('auth')->group(function () {
@@ -103,7 +104,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 ->names('users');
         });
 
-        // Artikel — admin dan editor
+        // Artikel - admin dan editor
         Route::resource('articles', AdminArticleController::class)
             ->except(['show'])
             ->names('articles');
