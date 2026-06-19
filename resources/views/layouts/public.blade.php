@@ -46,14 +46,14 @@
                         Cek Pesanan
                     </a>
                     <a href="{{ route('orders.create') }}"
-                        class="bg-green-700 text-white px-4 py-2 rounded-lg text-sm
+                        class="bg-green-700 text-white px-4 py-2 text-sm
                               hover:bg-green-800 transition font-medium">
                         Beli Tiket
                     </a>
                 </nav>
 
                 {{-- Hamburger Mobile --}}
-                <button id="nav-toggle" class="md:hidden p-2 rounded-lg text-stone-600 hover:bg-stone-100">
+                <button id="nav-toggle" class="md:hidden p-2 text-stone-600 hover:bg-stone-100">
                     <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
@@ -67,28 +67,38 @@
             </div>
 
             {{-- Nav Mobile --}}
-            <div id="nav-mobile" class="hidden md:hidden pb-4 space-y-1">
-                <a href="{{ route('home') }}"
-                    class="block px-3 py-2 rounded-lg text-stone-600 hover:bg-stone-100 text-sm">
-                    Beranda
-                </a>
-                <a href="{{ route('tickets.index') }}"
-                    class="block px-3 py-2 rounded-lg text-stone-600 hover:bg-stone-100 text-sm">
-                    Tiket
-                </a>
-                <a href="{{ route('articles.index') }}"
-                    class="block px-3 py-2 rounded-lg text-stone-600 hover:bg-stone-100 text-sm">
-                    Berita
-                </a>
-                <a href="{{ route('orders.check') }}"
-                    class="block px-3 py-2 rounded-lg text-stone-600 hover:bg-stone-100 text-sm">
-                    Cek Pesanan
-                </a>
-                <a href="{{ route('orders.create') }}"
-                    class="block px-3 py-2 rounded-lg bg-green-700 text-white
-                          text-sm font-medium text-center mt-2">
-                    Beli Tiket
-                </a>
+            <div id="nav-mobile"
+                class="hidden md:hidden absolute top-16 left-0 right-0 bg-white
+            shadow-lg border-t border-stone-100 z-50">
+                <div class="px-4 py-3 space-y-1">
+                    <a href="{{ route('home') }}"
+                        class="block px-3 py-2.5 text-stone-600 hover:bg-stone-100
+                  hover:text-green-700 text-sm transition">
+                        Beranda
+                    </a>
+                    <a href="{{ route('tickets.index') }}"
+                        class="block px-3 py-2.5 text-stone-600 hover:bg-stone-100
+                  hover:text-green-700 text-sm transition">
+                        Tiket
+                    </a>
+                    <a href="{{ route('articles.index') }}"
+                        class="block px-3 py-2.5 text-stone-600 hover:bg-stone-100
+                  hover:text-green-700 text-sm transition">
+                        Berita
+                    </a>
+                    <a href="{{ route('orders.check') }}"
+                        class="block px-3 py-2.5 text-stone-600 hover:bg-stone-100
+                  hover:text-green-700 text-sm transition">
+                        Cek Pesanan
+                    </a>
+                    <div class="pt-2 pb-1">
+                        <a href="{{ route('orders.create') }}"
+                            class="block px-3 py-2.5 bg-green-700 text-white text-sm
+                      font-medium text-center">
+                            Beli Tiket
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -115,7 +125,7 @@
                     <h4 class="text-white font-semibold mb-3">Informasi</h4>
                     <ul class="space-y-2 text-sm text-white/80">
                         <li>Jl. Raya Kukuh, Tabanan, Bali</li>
-                        <li>Buka setiap hari: 08.00 – 18.00 WITA</li>
+                        <li>Buka setiap hari: 08.00 - 18.00 WITA</li>
                         <li>
                             <a href="https://wa.me/{{ env('WHATSAPP_NUMBER') }}" target="_blank"
                                 class="hover:text-white transition">
