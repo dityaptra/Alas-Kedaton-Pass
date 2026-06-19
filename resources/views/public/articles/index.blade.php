@@ -15,9 +15,8 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Search & Filter --}}
-            <div
-                class="flex flex-col sm:flex-row items-start sm:items-center
-                    justify-between gap-4 mb-10">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center
+            justify-between gap-4 mb-10">
 
                 <p class="text-sm text-stone-500">
                     @if ($search)
@@ -29,39 +28,50 @@
                     @endif
                 </p>
 
-                <form method="GET" action="{{ route('articles.index') }}" class="flex items-center gap-2">
-                    <div class="relative">
-                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <input type="text" name="search" value="{{ $search }}" placeholder="Cari berita..."
-                            class="w-64 pl-9 pr-3 py-2 border border-stone-200
-                                  text-sm bg-white focus:outline-none focus:ring-2
-                                  focus:ring-green-500 focus:border-transparent transition">
-                    </div>
-                    <select name="sort" onchange="this.form.submit()"
-                        class="border border-stone-200 px-3 py-2 text-sm bg-white
-                               focus:outline-none focus:ring-2 focus:ring-green-500
-                               text-stone-600 transition">
-                        <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>Terbaru</option>
-                        <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>Terlama</option>
-                    </select>
-                    <button type="submit"
-                        class="bg-green-700 hover:bg-green-800 text-white
-                               px-4 py-2 text-sm transition">
-                        Cari
-                    </button>
-                    @if ($search)
-                        <a href="{{ route('articles.index', ['sort' => $sort]) }}"
-                            class="p-2 bg-stone-100 hover:bg-stone-200 text-stone-500 transition" title="Reset pencarian">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <form method="GET" action="{{ route('articles.index') }}"
+                    class="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+
+                    <div class="flex items-center gap-2">
+                        <div class="relative flex-1 sm:flex-none">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                        </a>
-                    @endif
+                            <input type="text" name="search" value="{{ $search }}" placeholder="Cari berita..."
+                                class="w-full sm:w-64 pl-9 pr-3 py-2 border border-stone-200
+                      text-sm bg-white focus:outline-none focus:ring-2
+                      focus:ring-green-500 focus:border-transparent transition">
+                        </div>
+                        <button type="submit"
+                            class="bg-green-700 hover:bg-green-800 text-white
+                   px-4 py-2 text-sm transition flex-shrink-0">
+                            Cari
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                        <select name="sort" onchange="this.form.submit()"
+                            class="w-36 border border-stone-200 px-3 py-2
+                   text-sm bg-white focus:outline-none focus:ring-2
+                   focus:ring-green-500 text-stone-600 transition">
+                            <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>Terbaru</option>
+                            <option value="oldest" {{ $sort === 'oldest' ? 'selected' : '' }}>Terlama</option>
+                        </select>
+
+                        @if ($search)
+                            <a href="{{ route('articles.index', ['sort' => $sort]) }}"
+                                class="p-2 bg-stone-100 hover:bg-stone-200 text-stone-500
+              transition flex-shrink-0"
+                                title="Reset pencarian">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </a>
+                        @endif
+                    </div>
+
                 </form>
             </div>
 
