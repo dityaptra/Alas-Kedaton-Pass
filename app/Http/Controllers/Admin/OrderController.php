@@ -16,7 +16,7 @@ class OrderController extends Controller
         $orders = Order::with('items')
             ->when($status !== 'all', fn($q) => $q->where('status', $status))
             ->latest()
-            ->paginate(15);
+            ->paginate(10);
 
         return view('admin.orders.index', compact('orders', 'status'));
     }
