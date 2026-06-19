@@ -7,7 +7,7 @@
     {{-- Hero --}}
     <section class="relative text-white overflow-hidden">
         <div class="relative h-[90vh] min-h-[560px] max-h-[800px]">
-            <img src="/images/alas-kedaton-hero.jpg" alt="Wisata Alas Kedaton"
+            <img src="/images/alas-kedaton-hero.webp" alt="Wisata Alas Kedaton"
                 class="absolute inset-0 w-full h-full object-cover">
             {{-- Gradient overlay dari bawah agar teks atas tetap terlihat --}}
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
@@ -48,20 +48,20 @@
     </section>
 
     {{-- Strip fakta singkat --}}
-    <section class="bg-stone-900 text-white">
+    <section class="bg-green-800 text-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-3 divide-x divide-stone-700">
+            <div class="grid grid-cols-3 divide-x divide-green-600">
                 <div class="py-6 px-6 sm:px-10">
-                    <p class="text-amber-400 text-2xl sm:text-3xl font-bold mb-1">100rb+</p>
-                    <p class="text-stone-400 text-xs sm:text-sm">Pengunjung per tahun</p>
+                    <p class="text-white text-2xl sm:text-3xl font-bold mb-1">100rb+</p>
+                    <p class="text-green-200 text-xs sm:text-sm">Pengunjung per tahun</p>
                 </div>
                 <div class="py-6 px-6 sm:px-10">
-                    <p class="text-amber-400 text-2xl sm:text-3xl font-bold mb-1">5 Jenis</p>
-                    <p class="text-stone-400 text-xs sm:text-sm">Kategori tiket tersedia</p>
+                    <p class="text-white text-2xl sm:text-3xl font-bold mb-1">5 Jenis</p>
+                    <p class="text-green-200 text-xs sm:text-sm">Kategori tiket tersedia</p>
                 </div>
                 <div class="py-6 px-6 sm:px-10">
-                    <p class="text-amber-400 text-2xl sm:text-3xl font-bold mb-1">Rp 10rb</p>
-                    <p class="text-stone-400 text-xs sm:text-sm">Tiket mulai dari</p>
+                    <p class="text-white text-2xl sm:text-3xl font-bold mb-1">Rp 10rb</p>
+                    <p class="text-green-200 text-xs sm:text-sm">Tiket mulai dari</p>
                 </div>
             </div>
         </div>
@@ -82,11 +82,10 @@
                 </div>
             </div>
 
-            {{-- Baris pertama: 3 tiket --}}
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                @foreach ($tickets->take(3) as $ticket)
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                @foreach ($tickets as $ticket)
                     <div
-                        class="bg-white p-7 flex flex-col gap-4 border border-stone-300
+                        class="bg-white p-7 flex flex-col gap-4 border border-stone-400
                         hover:border-green-600 hover:shadow-sm transition">
                         <div>
                             <p class="text-xs text-stone-400 uppercase tracking-widest mb-1">
@@ -97,12 +96,12 @@
                         <p class="text-stone-400 text-sm leading-relaxed flex-1">
                             {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
                         </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-400">
                             <div>
                                 <p class="text-2xl font-bold text-stone-900">
                                     Rp {{ number_format($ticket->price, 0, ',', '.') }}
                                 </p>
-                                <p class="text-xs text-stone-400 mt-0.5">per orang · sudah termasuk pajak</p>
+                                <p class="text-xs text-stone-400 mt-0.5">per orang | sudah termasuk pajak</p>
                             </div>
                             <a href="{{ route('orders.create') }}"
                                 class="text-green-700 hover:text-green-800 text-sm font-semibold
@@ -116,42 +115,11 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
 
-            {{-- Baris kedua: 2 tiket --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                @foreach ($tickets->skip(3) as $ticket)
-                    <div
-                        class="bg-white p-7 flex flex-col gap-4 border border-stone-300
-                        hover:border-green-600 hover:shadow-sm transition">
-                        <div>
-                            <p class="text-xs text-stone-400 uppercase tracking-widest mb-1">
-                                {{ $ticket->category === 'asing' ? 'Wisatawan Asing' : ($ticket->category === 'domestik' ? 'Wisatawan Domestik' : 'Warga Lokal') }}
-                            </p>
-                            <h3 class="text-lg font-bold text-stone-800">{{ $ticket->name }}</h3>
-                        </div>
-                        <p class="text-stone-400 text-sm leading-relaxed flex-1">
-                            {{ $ticket->description ?? 'Tiket masuk Wisata Alas Kedaton.' }}
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-100">
-                            <div>
-                                <p class="text-2xl font-bold text-stone-900">
-                                    Rp {{ number_format($ticket->price, 0, ',', '.') }}
-                                </p>
-                                <p class="text-xs text-stone-400 mt-0.5">per orang · sudah termasuk pajak</p>
-                            </div>
-                            <a href="{{ route('orders.create') }}"
-                                class="text-green-700 hover:text-green-800 text-sm font-semibold
-                              transition flex items-center gap-1">
-                                Pesan
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
+                {{-- Pengisi agar baris terakhir tetap 3 kolom --}}
+                @if ($tickets->count() % 3 === 2)
+                    <div class="hidden sm:block"></div>
+                @endif
             </div>
 
         </div>
@@ -177,10 +145,6 @@
                         class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800
                           text-white font-medium px-7 py-3 transition text-sm">
                         Mulai Pesan
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
                     </a>
                 </div>
 
@@ -280,7 +244,7 @@
                 <div class="text-center mt-8 sm:hidden">
                     <a href="{{ route('articles.index') }}"
                         class="text-green-700 text-sm font-medium hover:text-green-800 transition">
-                        Lihat semua berita →
+                        Semua berita→
                     </a>
                 </div>
 
