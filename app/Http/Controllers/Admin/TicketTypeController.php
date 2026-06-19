@@ -28,10 +28,12 @@ class TicketTypeController extends Controller
             'visitor_type' => 'nullable|in:dewasa,anak',
             'description'  => 'nullable|string',
             'price'        => 'required|numeric|min:0',
-            'is_active'    => 'boolean',
         ]);
 
-        TicketType::create($validated);
+        TicketType::create([
+            ...$validated,
+            'is_active' => $request->boolean('is_active'),
+        ]);
 
         return redirect()->route('admin.ticket-types.index')
             ->with('success', 'Jenis tiket berhasil ditambahkan.');
@@ -50,10 +52,12 @@ class TicketTypeController extends Controller
             'visitor_type' => 'nullable|in:dewasa,anak',
             'description'  => 'nullable|string',
             'price'        => 'required|numeric|min:0',
-            'is_active'    => 'boolean',
         ]);
 
-        $ticketType->update($validated);
+        $ticketType->update([
+            ...$validated,
+            'is_active' => $request->boolean('is_active'),
+        ]);
 
         return redirect()->route('admin.ticket-types.index')
             ->with('success', 'Jenis tiket berhasil diperbarui.');
