@@ -16,7 +16,7 @@
             @csrf
 
             {{-- Data Pemesan --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-8 mb-5">
+            <div class="bg-white shadow-sm border border-stone-100 p-8 mb-5">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="bg-green-100 p-2 rounded-lg">
                         <svg class="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,7 +34,7 @@
                         </label>
                         <input type="text" name="visitor_name" value="{{ old('visitor_name') }}"
                             placeholder="Masukkan nama lengkap"
-                            class="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm
+                            class="w-full border border-stone-200  px-4 py-3 text-sm
                                   bg-stone-50 focus:bg-white focus:outline-none
                                   focus:ring-2 focus:ring-green-500 focus:border-transparent
                                   transition placeholder-stone-400
@@ -55,7 +55,7 @@
                                          text-stone-400 text-sm font-medium">+62</span>
                                 <input type="text" name="visitor_phone" value="{{ old('visitor_phone') }}"
                                     placeholder="81234567890"
-                                    class="w-full border border-stone-200 rounded-xl pl-12 pr-4
+                                    class="w-full border border-stone-200 pl-12 pr-4
                                           py-3 text-sm bg-stone-50 focus:bg-white focus:outline-none
                                           focus:ring-2 focus:ring-green-500 focus:border-transparent
                                           transition placeholder-stone-400
@@ -72,7 +72,7 @@
                             </label>
                             <input type="date" name="visit_date" value="{{ old('visit_date') }}"
                                 min="{{ date('Y-m-d') }}"
-                                class="w-full border border-stone-200 rounded-xl px-4 py-3
+                                class="w-full border border-stone-200 px-4 py-3
                                       text-sm bg-stone-50 focus:bg-white focus:outline-none
                                       focus:ring-2 focus:ring-green-500 focus:border-transparent
                                       transition text-stone-700
@@ -89,7 +89,7 @@
                         </label>
                         <input type="email" name="visitor_email" value="{{ old('visitor_email') }}"
                             placeholder="nama@email.com"
-                            class="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm
+                            class="w-full border border-stone-200 px-4 py-3 text-sm
                                   bg-stone-50 focus:bg-white focus:outline-none
                                   focus:ring-2 focus:ring-green-500 focus:border-transparent
                                   transition placeholder-stone-400
@@ -105,7 +105,7 @@
             </div>
 
             {{-- Pilih Tiket --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-8 mb-5">
+            <div class="bg-white shadow-sm border border-stone-100 p-8 mb-5">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="bg-amber-100 p-2 rounded-lg">
                         <svg class="w-5 h-5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,7 +119,7 @@
                 @error('tickets')
                     <div
                         class="bg-red-50 border border-red-200 text-red-600 text-sm
-                        rounded-xl px-4 py-3 mb-4">
+                        px-4 py-3 mb-4">
                         {{ $message }}
                     </div>
                 @enderror
@@ -140,7 +140,7 @@
                             </div>
                             <div class="flex items-center gap-3">
                                 <button type="button" onclick="changeQty({{ $index }}, -1)"
-                                    class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200
+                                    class="w-8 h-8 bg-stone-100 hover:bg-stone-200
                                        text-stone-600 transition flex items-center justify-center
                                        text-lg font-medium leading-none">
                                     −
@@ -150,7 +150,7 @@
                                     0
                                 </span>
                                 <button type="button" onclick="changeQty({{ $index }}, 1)"
-                                    class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200
+                                    class="w-8 h-8 bg-stone-100 hover:bg-stone-200
                                        text-stone-600 transition flex items-center justify-center
                                        text-lg font-medium leading-none">
                                     +
@@ -161,7 +161,7 @@
                 </div>
 
                 {{-- Ringkasan --}}
-                <div class="mt-4 bg-stone-50 rounded-xl p-4 space-y-2">
+                <div class="mt-4 bg-stone-50 p-4 space-y-2">
                     <div class="flex justify-between items-center text-sm">
                         <span class="text-stone-500">Total Tiket</span>
                         <span id="total-tiket" class="font-semibold text-stone-700">0 tiket</span>
@@ -176,11 +176,11 @@
             {{-- Submit --}}
             <button type="submit"
                 class="w-full bg-green-700 hover:bg-green-800 text-white font-bold
-                       py-4 rounded-xl transition text-base flex items-center
+                       py-4 transition text-base flex items-center
                        justify-center gap-2 cursor-pointer">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2
-                                         M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                             M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
                 Lanjutkan Pemesanan
             </button>

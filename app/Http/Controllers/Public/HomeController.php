@@ -16,7 +16,7 @@ class HomeController extends Controller
         SEOMeta::setDescription('Wisata alam hutan suci dengan ribuan kera dan pura bersejarah di Tabanan, Bali. Pesan tiket masuk secara online.');
         SEOMeta::setCanonical(route('home'));
 
-        OpenGraph::setTitle('AlasKedatonPass — Tiket Wisata Alas Kedaton');
+        OpenGraph::setTitle('AlasKedatonPass - Tiket Wisata Alas Kedaton');
         OpenGraph::setDescription('Wisata alam hutan suci dengan ribuan kera dan pura bersejarah di Tabanan, Bali.');
         OpenGraph::setUrl(route('home'));
 
