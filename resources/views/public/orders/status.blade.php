@@ -8,18 +8,55 @@
 
     @php
         $statusConfig = [
-            'pending'   => ['label' => 'Menunggu Konfirmasi', 'color' => 'amber',  'icon' => '⏳'],
-            'confirmed' => ['label' => 'Pembayaran Dikonfirmasi', 'color' => 'green', 'icon' => '✅'],
-            'cancelled' => ['label' => 'Dibatalkan', 'color' => 'red',   'icon' => '❌'],
-            'expired'   => ['label' => 'Kedaluwarsa', 'color' => 'stone', 'icon' => '🕒'],
+            'pending'   => ['label' => 'Menunggu Konfirmasi',      'color' => 'amber'],
+            'confirmed' => ['label' => 'Pembayaran Dikonfirmasi',   'color' => 'green'],
+            'cancelled' => ['label' => 'Dibatalkan',                'color' => 'red'],
+            'expired'   => ['label' => 'Kedaluwarsa',               'color' => 'stone'],
         ];
         $s = $statusConfig[$order->status];
     @endphp
 
     <div class="text-center mb-8">
-        <p class="text-4xl mb-3">{{ $s['icon'] }}</p>
+
+        {{-- Ikon SVG berdasarkan status --}}
+        @if ($order->status === 'confirmed')
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center
+                    justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 13l4 4L19 7"/>
+            </svg>
+        </div>
+        @elseif ($order->status === 'pending')
+        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center
+                    justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
+        @elseif ($order->status === 'cancelled')
+        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center
+                    justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </div>
+        @else
+        <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center
+                    justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
+        @endif
+
         <h1 class="text-2xl font-bold text-stone-800">{{ $s['label'] }}</h1>
-        <p class="text-stone-500 mt-1">Nomor Order: <strong>{{ $order->order_number }}</strong></p>
+        <p class="text-stone-500 mt-1">
+            Nomor Order: <strong>{{ $order->order_number }}</strong>
+        </p>
     </div>
 
     {{-- Detail Order --}}
@@ -38,7 +75,9 @@
             </div>
             <div class="flex justify-between">
                 <span class="text-stone-500">Status</span>
-                <span class="font-semibold text-{{ $s['color'] }}-600">{{ $s['label'] }}</span>
+                <span class="font-semibold text-{{ $s['color'] }}-600">
+                    {{ $s['label'] }}
+                </span>
             </div>
         </div>
 
@@ -48,7 +87,9 @@
                 <span class="text-stone-600">
                     {{ $item->ticketType->name }} × {{ $item->quantity }}
                 </span>
-                <span>Rp {{ number_format($item->price_snapshot * $item->quantity, 0, ',', '.') }}</span>
+                <span>
+                    Rp {{ number_format($item->price_snapshot * $item->quantity, 0, ',', '.') }}
+                </span>
             </div>
             @endforeach
         </div>
@@ -63,8 +104,10 @@
 
     @if ($order->isConfirmed())
     <div class="bg-green-50 border border-green-200 rounded-2xl p-6 text-center">
-        <p class="text-green-700 font-semibold mb-2">E-ticket sudah dikirim ke email kamu!</p>
-        <p class="text-green-600 text-sm">{{ $order->visitor_email }}</p>
+        <p class="text-green-700 font-semibold mb-2">Pembayaran sudah dikonfirmasi</p>
+        <p class="text-green-600 text-sm">
+            Tunjukkan nomor order ini kepada petugas saat tiba di lokasi.
+        </p>
     </div>
     @elseif ($order->isPending())
     <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center">
