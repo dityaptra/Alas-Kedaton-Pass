@@ -30,9 +30,6 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        // Rate Limiter untuk mencatat percobaan login gagal
-        RateLimiter::hit('login.' . $request->ip());
-
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);

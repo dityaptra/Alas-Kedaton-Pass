@@ -76,7 +76,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'login'])->name('login.post')
-            ->middleware('throttle:5,1');
+            ->middleware('throttle:4,1');
     });
 
     Route::middleware('auth')->group(function () {
