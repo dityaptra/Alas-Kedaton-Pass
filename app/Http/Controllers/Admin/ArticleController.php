@@ -30,8 +30,15 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
             'content'   => 'required|string',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
             'status'    => 'required|in:draft,published',
+        ], [
+            'title.required'   => 'Judul artikel wajib diisi.',
+            'content.required' => 'Konten artikel wajib diisi.',
+            'thumbnail.image'  => 'File harus berupa gambar.',
+            'thumbnail.mimes'  => 'Format gambar harus JPG, PNG, atau WebP.',
+            'thumbnail.max'    => 'Ukuran gambar maksimal 1MB.',
+            'status.required'  => 'Status artikel wajib dipilih.',
         ]);
 
         $thumbnailPath = null;
@@ -64,8 +71,15 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
             'content'   => 'required|string',
-            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
             'status'    => 'required|in:draft,published',
+        ], [
+            'title.required'   => 'Judul artikel wajib diisi.',
+            'content.required' => 'Konten artikel wajib diisi.',
+            'thumbnail.image'  => 'File harus berupa gambar.',
+            'thumbnail.mimes'  => 'Format gambar harus JPG, PNG, atau WebP.',
+            'thumbnail.max'    => 'Ukuran gambar maksimal 1MB.',
+            'status.required'  => 'Status artikel wajib dipilih.',
         ]);
 
         $thumbnailPath = $article->thumbnail;
