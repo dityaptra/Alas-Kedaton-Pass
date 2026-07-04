@@ -21,7 +21,6 @@
             <span class="font-bold text-lg">
                 AlasKedaton<span class="text-amber-400">Pass</span>
             </span>
-            <span class="ml-2 text-xs text-green-300 font-medium">Admin</span>
         </div>
 
         {{-- Nav --}}
