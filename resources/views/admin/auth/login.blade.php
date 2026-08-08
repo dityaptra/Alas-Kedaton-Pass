@@ -47,13 +47,6 @@
                            class="w-full border border-stone-300 rounded-xl px-4 py-3
                                   text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
                 </div>
-                <div class="flex items-center gap-2">
-                    <input type="checkbox" name="remember" id="remember"
-                           class="rounded border-stone-300 text-green-700">
-                    <label for="remember" class="text-sm text-stone-600">
-                        Ingat saya
-                    </label>
-                </div>
                 <button type="submit"
                         class="w-full bg-green-700 hover:bg-green-800 text-white
                                font-bold py-3 rounded-xl transition">

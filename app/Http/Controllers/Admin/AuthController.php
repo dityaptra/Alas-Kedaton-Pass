@@ -25,7 +25,7 @@ class AuthController extends Controller
             'password.required' => 'Password wajib diisi.',
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }
