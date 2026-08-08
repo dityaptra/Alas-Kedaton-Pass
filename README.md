@@ -7,7 +7,7 @@ Sistem pemesanan tiket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali.
 **Publik:**
 - Pemesanan tiket online tanpa perlu membuat akun
 - Nomor order otomatis dengan format `AK-YYYYMMDD-XXXX`
-- Konfirmasi pembayaran via WhatsApp dengan pesan otomatis
+- Upload bukti pembayaran langsung dari halaman sukses atau halaman cek pesanan
 - Pengecekan status pesanan menggunakan nomor order dan nomor WhatsApp
 - Halaman berita dengan pencarian, filter urutan, dan pagination
 - Komentar pada artikel berita tanpa perlu akun
@@ -15,12 +15,17 @@ Sistem pemesanan tiket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali.
 - SEO-friendly dengan meta tags dan sitemap otomatis
 
 **Admin:**
-- Kelola order: konfirmasi, batalkan, upload bukti pembayaran
+- Kelola order: verifikasi bukti pembayaran, konfirmasi, dan batalkan order
 - Kelola jenis tiket: CRUD dengan status aktif/nonaktif
 - Kelola artikel: CRUD dengan text editor TinyMCE
 - Kelola komentar: lihat dan hapus komentar
 - Kelola pengguna: CRUD akun Admin dan Editor
-- Halaman Dashboard
+- Dashboard penjualan
+
+**Editor:**
+- Kelola artikel: CRUD dengan text editor TinyMCE
+- Kelola komentar: lihat dan hapus komentar
+- Dashboard artikel & komentar
 
 ## Tech Stack
 
@@ -28,7 +33,7 @@ Sistem pemesanan tiket berbasis web untuk Wisata Alas Kedaton, Tabanan, Bali.
 |---|---|
 | Backend | Laravel 13, PHP 8.4 |
 | Frontend | Blade, TailwindCSS v4, Vanilla JavaScript |
-| Rich Text Editor | TinyMCE 6 via CDN |
+| Text Editor | TinyMCE 6 via CDN |
 | Database | MySQL 8 |
 | SEO | artesaos/seotools, spatie/laravel-sitemap |
 | Build Tool | Vite |
@@ -76,7 +81,7 @@ DB_DATABASE=alaskedatonpass
 DB_USERNAME=root
 DB_PASSWORD=
 
-WHATSAPP_NUMBER=6281234567890
+WHATSAPP_NUMBER=6281234567890   # menyesuaikan (opsional)
 
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -140,13 +145,15 @@ php artisan serve
 
 ## Alur Pemesanan
 
-1. Pengunjung mengisi form pemesanan (nama, WhatsApp, email, tanggal kunjungan, jumlah tiket)
+1. Pelanggan mengisi form pemesanan (nama, WhatsApp, email, tanggal kunjungan, jumlah tiket)
 2. Sistem menyimpan order dan membuat nomor order unik
-3. Pengunjung transfer sesuai total, lalu klik tombol WhatsApp di halaman sukses untuk mengirim bukti pembayaran ke pengelola
-4. Admin membuka panel, cek bukti pembayaran, lalu klik Konfirmasi Pembayaran
-5. Pengunjung datang ke lokasi dan menunjukkan nomor order atau screenshot halaman sukses ke petugas
-6. Petugas memberikan tiket fisik kepada pengunjung
-7. Pengunjung bisa cek status pesanan kapan saja di `/cek-pesanan`
+3. Pelanggan transfer sesuai total ke rekening pengelola
+4. Pelanggan upload foto bukti transfer di halaman sukses atau lewat menu Cek Pesanan
+5. Admin membuka panel, melihat bukti pembayaran, lalu klik Konfirmasi jika valid
+6. Pelanggan datang ke lokasi dan menunjukkan nomor order ke petugas
+7. Petugas memberikan tiket fisik kepada pelanggan
+
+> **Catatan:** Pelanggan disarankan menyimpan atau screenshot nomor order sebelum menutup halaman sukses, karena nomor order diperlukan untuk mengecek status pesanan dan mengupload bukti pembayaran jika halaman sukses sudah ditutup.
 
 ## Jenis Tiket
 
@@ -157,6 +164,14 @@ php artisan serve
 | Domestik Dewasa | Wisatawan Nusantara | Rp 20.000/pax |
 | Domestik Anak | Wisatawan Nusantara | Rp 15.000/pax |
 | Lokal/Bali | Warga Bali | Rp 10.000/pax |
+
+## Keterbatasan Sistem
+
+Beberapa hal yang belum diimplementasikan pada sistem:
+
+- **Manajemen kuota tiket harian**: sistem saat ini tidak membatasi jumlah tiket yang bisa dipesan per hari. Solusi sementara adalah admin memantau jumlah order per tanggal dan menonaktifkan tiket secara manual jika kapasitas sudah terpenuhi
+- **Pengiriman e-ticket via email**: placeholder sudah tersedia di `app/Http/Controllers/Admin/OrderController.php` pada method `confirm()`. Untuk mengaktifkan, isi konfigurasi `MAIL_*` di `.env`, buat Mailable dengan `php artisan make:mail ETicketMail`, lalu uncomment baris `Mail::to()` di method tersebut
+- **Login pelanggan**: sistem saat ini tidak menyediakan akun untuk pelanggan. Pelanggan mengakses pesanan lewat nomor order dan nomor WhatsApp di halaman Cek Pesanan
 
 ## Perintah Berguna
 
@@ -169,6 +184,3 @@ npm run dev                  # development assets
 npm run build                # production assets
 ```
 
-## Fitur Pending
-
-**Pengiriman e-ticket via email:** placeholder sudah tersedia di `app/Http/Controllers/Admin/OrderController.php` pada method `confirm()`. Untuk mengaktifkan, isi konfigurasi `MAIL_*` di `.env`, buat Mailable dengan `php artisan make:mail ETicketMail`, lalu uncomment baris `Mail::to()` di method tersebut.
