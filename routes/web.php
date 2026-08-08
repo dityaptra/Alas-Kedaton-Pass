@@ -27,6 +27,8 @@ Route::get('/pesan', [OrderController::class, 'create'])->name('orders.create');
 Route::post('/pesan', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/pesan/sukses/{orderNumber}', [OrderController::class, 'success'])
     ->name('orders.success');
+Route::post('/pesan/{orderNumber}/bukti', [OrderController::class, 'uploadProof'])
+     ->name('orders.uploadProof');
 
 Route::get('/cek-pesanan', [OrderController::class, 'checkForm'])
     ->name('orders.check');

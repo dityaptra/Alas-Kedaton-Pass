@@ -9,6 +9,7 @@ use App\Models\TicketType;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -133,5 +134,30 @@ class OrderController extends Controller
         }
 
         return view('public.orders.status', compact('order'));
+    }
+
+    public function uploadProof(Request $request, string $orderNumber)
+    {
+        $order = Order::where('order_number', $orderNumber)->firstOrFail();
+
+        $request->validate([
+            'payment_proof' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'payment_proof.required' => 'Bukti pembayaran wajib diunggah.',
+            'payment_proof.image'    => 'File harus berupa gambar.',
+            'payment_proof.mimes'    => 'Format file harus JPG atau PNG.',
+            'payment_proof.max'      => 'Ukuran file maksimal 2MB.',
+        ]);
+
+        if ($order->payment_proof) {
+            Storage::disk('public')->delete($order->payment_proof);
+        }
+
+        $path = $request->file('payment_proof')
+            ->store('payment-proofs', 'public');
+
+        $order->update(['payment_proof' => $path]);
+
+        return back()->with('proof_success', 'Bukti pembayaran berhasil diunggah. Pesanan kamu sedang diverifikasi oleh pengelola.');
     }
 }
