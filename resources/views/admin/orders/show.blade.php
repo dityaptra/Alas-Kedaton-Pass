@@ -95,13 +95,13 @@
                         <img src="{{ Storage::url($order->payment_proof) }}" alt="Bukti Pembayaran"
                             onclick="document.getElementById('modal-bukti').classList.remove('hidden')"
                             class="max-h-64 rounded-xl border border-stone-200 object-contain
-                            cursor-pointer hover:opacity-90 transition">
+                    cursor-pointer hover:opacity-90 transition">
                         <p class="text-xs text-stone-400 mt-2">Klik gambar untuk memperbesar</p>
                     </div>
 
                     <a href="{{ Storage::url($order->payment_proof) }}" download
                         class="inline-flex items-center gap-2 bg-stone-100 hover:bg-stone-200
-                      text-stone-700 text-sm font-medium px-4 py-2 rounded-lg transition mb-4">
+              text-stone-700 text-sm font-medium px-4 py-2 rounded-lg transition">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -112,15 +112,15 @@
                     {{-- Modal lightbox --}}
                     <div id="modal-bukti"
                         class="hidden fixed inset-0 z-50 bg-black/80 flex items-center
-                        justify-center p-4"
+                justify-center p-4"
                         onclick="this.classList.add('hidden')">
                         <div class="relative max-w-3xl w-full">
                             <img src="{{ Storage::url($order->payment_proof) }}" alt="Bukti Pembayaran"
                                 class="w-full max-h-[85vh] object-contain rounded-xl">
                             <button onclick="document.getElementById('modal-bukti').classList.add('hidden')"
                                 class="absolute top-3 right-3 bg-white/20 hover:bg-white/40
-                                   text-white w-8 h-8 rounded-full flex items-center
-                                   justify-center transition text-lg font-bold">
+                           text-white w-8 h-8 rounded-full flex items-center
+                           justify-center transition text-lg font-bold">
                                 ✕
                             </button>
                             <p class="text-center text-white/50 text-xs mt-3">
@@ -129,53 +129,15 @@
                         </div>
                     </div>
                 @else
-                    <p class="text-stone-400 text-sm mb-4">Belum ada bukti pembayaran diunggah.</p>
+                    <div class="bg-stone-50 rounded-xl p-6 text-center text-stone-400">
+                        <svg class="w-10 h-10 mx-auto mb-2 text-stone-300" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p class="text-sm">Pelanggan belum mengupload bukti pembayaran.</p>
+                    </div>
                 @endif
-
-                @if ($order->isPending())
-                    <form action="{{ route('admin.orders.proof', $order) }}" method="POST" enctype="multipart/form-data"
-                        class="{{ $order->payment_proof ? 'mt-4 border-t border-stone-100 pt-4' : '' }}">
-                        @csrf
-
-                        <div id="preview-container" class="hidden mb-4">
-                            <img id="preview-image" src="" alt="Preview Bukti"
-                                class="max-h-48 rounded-xl border border-stone-200 object-contain">
-                            <p class="text-xs text-stone-400 mt-1">Preview bukti yang akan diupload</p>
-                        </div>
-
-                        <div class="flex gap-3">
-                            <input type="file" name="payment_proof" id="payment_proof_input" accept=".jpg,.jpeg,.png"
-                                class="flex-1 text-sm text-stone-600 file:mr-3 file:py-2
-                                  file:px-4 file:rounded-lg file:border-0
-                                  file:bg-stone-100 file:text-stone-700
-                                  file:font-medium file:text-sm
-                                  hover:file:bg-stone-200 transition">
-                            <button type="submit"
-                                class="bg-stone-700 hover:bg-stone-800 text-white
-                                   text-sm font-medium px-4 py-2 rounded-lg transition">
-                                Upload
-                            </button>
-                        </div>
-                        @error('payment_proof')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </form>
-
-                    <script>
-                        document.getElementById('payment_proof_input').addEventListener('change', function(e) {
-                            const file = e.target.files[0];
-                            if (!file) return;
-
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                document.getElementById('preview-image').src = e.target.result;
-                                document.getElementById('preview-container').classList.remove('hidden');
-                            };
-                            reader.readAsDataURL(file);
-                        });
-                    </script>
-                @endif
-
             </div>
 
         </div>
